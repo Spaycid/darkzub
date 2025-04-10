@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Zub</title>
+    <style>
+        body {
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            height: 100vh;
+        }
+        
+        /* Fond pour les pages 1-3 et Chaloforest */
+        body:not(.final-bg):not(.daron-page) {
+            background-image: url('vector-background-damask-seamless-pattern-ornement-classique-damas-ancienne-texture-victorienne-sans-soudure-pour-papiers-peints-textile-emballage-modele-baroque-floral-exquis_1217-738.png');
+            background-color: #000;
+        }
+        
+        /* Fond pour la page finale */
+        body.final-bg {
+            background-image: url('shrek zobust.jpg');
+        }
+        
+        /* Fond pour la page Daron Souris */
+        body.daron-page {
+            background-image: url('binary-code-data-background-free-video.jpg');
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 1px solid #0f0;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #0f0;
+        }
+        
+        h1, h2 {
+            color: #0f0;
+            text-align: center;
+            text-shadow: 0 0 5px #0f0;
+        }
+        
+        .password-form {
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        input[type="password"], input[type="text"], input[type="search"] {
+            background-color: #111;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 10px;
+            width: 200px;
+            font-size: 16px;
+        }
+        
+        button {
+            background-color: #111;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background-color: #0f0;
+            color: #000;
+        }
+        
+        .verification {
+            margin: 40px 0;
+            padding: 20px;
+            border: 1px dashed #0f0;
+        }
+        
+        .success {
+            color: #0f0;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .final-page {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 50px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+        }
+        
+        .error {
+            color: #f00;
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        .search-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .search-box {
+            width: 60%;
+            max-width: 600px;
+            padding: 15px;
+            font-size: 18px;
+        }
+        
+        .search-button {
+            padding: 15px 30px;
+            font-size: 18px;
+        }
+        
+        .prochaines-link {
+            color: #0f0;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        
+        .prochaines-link:hover {
+            color: #fff;
+        }
+        
+        #chaloforestPage {
+            text-align: center;
+        }
+        
+        #searchResults {
+            margin-top: 30px;
+            text-align: left;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+        }
+        
+        /* Page Daron Souris */
+        .daron-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 1px solid #f00;
+            border-radius: 5px;
+            box-shadow: 0 0 15px #f00;
+            text-align: center;
+        }
+        
+        .daron-image {
+            max-width: 300px;
+            margin-bottom: 20px;
+        }
+        
+        .daron-description {
+            color: #0f0;
+            text-align: justify;
+            line-height: 1.6;
+        }
+        
+        .warning {
+            color: #f00;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page 1 -->
+    <div class="container" id="page1">
+        <h1>Bienvenue dans le Dark Zub</h1>
+        <p>Entrez le mot de passe pour continuer :</p>
+        
+        <div class="password-form">
+            <input type="password" id="password1" placeholder="Mot de passe">
+            <button onclick="checkPassword(1)">Valider</button>
+            <p class="error" id="error1"></p>
+        </div>
+        
+        <div class="verification">
+            <h2>Vérification robot : jeu de mot</h2>
+            <p>Je suis noir quand tu m'achètes, rouge quand tu m'utilises, gris quand tu me jettes. Qui suis-je ?</p>
+            <input type="text" id="answer1" placeholder="Votre réponse">
+            <button onclick="checkAnswer(1)">Vérifier</button>
+            <div class="success" id="success1">Mot de passe trouvé: <strong>zubador</strong></div>
+        </div>
+    </div>
+    
+    <!-- Page 2 -->
+    <div class="container hidden" id="page2">
+        <h1>Dark Zub - Niveau 2</h1>
+        <p>Entrez le mot de passe pour continuer :</p>
+        
+        <div class="password-form">
+            <input type="password" id="password2" placeholder="Mot de passe">
+            <button onclick="checkPassword(2)">Valider</button>
+            <p class="error" id="error2"></p>
+        </div>
+        
+        <div class="verification">
+            <h2>Vérification robot : jeu de mot</h2>
+            <p>Je peux voler sans ailes, pleurer sans yeux. Partout où je vais, l'obscurité me suit. Qui suis-je ?</p>
+            <input type="text" id="answer2" placeholder="Votre réponse">
+            <button onclick="checkAnswer(2)">Vérifier</button>
+            <div class="success" id="success2">Mot de passe trouvé: <strong>zibandoski</strong></div>
+        </div>
+    </div>
+    
+    <!-- Page 3 -->
+    <div class="container hidden" id="page3">
+        <h1>Dark Zub - Niveau 3</h1>
+        <p>Entrez le mot de passe pour continuer :</p>
+        
+        <div class="password-form">
+            <input type="password" id="password3" placeholder="Mot de passe">
+            <button onclick="checkPassword(3)">Valider</button>
+            <p class="error" id="error3"></p>
+        </div>
+        
+        <div class="verification">
+            <h2>Vérification robot : jeu de mot</h2>
+            <p>Plus on me prend, plus on me laisse. Quand on me parle, on me répète. Qui suis-je ?</p>
+            <input type="text" id="answer3" placeholder="Votre réponse">
+            <button onclick="checkAnswer(3)">Vérifier</button>
+            <div class="success" id="success3">Mot de passe trouvé: <strong>zobostianozubostianizibandoskizardo</strong></div>
+        </div>
+    </div>
+    
+    <!-- Page Finale -->
+    <div class="container hidden" id="finalPage">
+        <div class="final-page">
+            <h1>Bien joué, vous êtes rentré dans le Dark Zub Continent</h1>
+            <p>revenez plus tard pour de <span class="prochaines-link" onclick="showChaloforest()">prochaines</span> updates.</p>
+        </div>
+    </div>
+    
+    <!-- Page Chaloforest -->
+    <div class="container hidden" id="chaloforestPage">
+        <h1>Chaloforest - Navigateur de recherche</h1>
+        
+        <div class="search-container">
+            <input type="search" id="searchInput" class="search-box" placeholder="Recherchez sur Chaloforest...">
+            <button class="search-button" onclick="performSearch()">Rechercher</button>
+        </div>
+        
+        <div id="searchResults"></div>
+    </div>
+    
+    <!-- Page Daron Souris -->
+    <div class="container hidden" id="daronPage">
+        <div class="daron-container">
+            <img src="efefefe-removebg-preview.png" alt="Daron Souris" class="daron-image">
+            <p class="daron-description">
+                Le daron souris, le créateur de ce site, faites gaffe à lui. Il a rejoint le Dark Zub en 498 an. Le daron souris à créer le fils de la souris 150 ans après, après qu'il ai rejoint le dark zub. Le daron est doté de téléportation, de frappe pouvant tuer en un coup n'importe qui et n'importe quoi, de la radioactivité. Défense imparable, une fois arrivé sur cette page, le daron souris vous retraceras même muni d'un VPN.
+            </p>
+            <p class="warning">Soyez prudent, il est la...</p>
+        </div>
+    </div>
+    
+    <script>
+        // Réponses aux énigmes
+        const answers = {
+            1: "charbon",
+            2: "nuage",
+            3: "silence"
+        };
+        
+        // Mots de passe pour chaque page
+        const passwords = {
+            1: "zubador",
+            2: "zibandoski",
+            3: "zobostianozubostianizibandoskizardo"
+        };
+        
+        // Vérifie la réponse à l'énigme
+        function checkAnswer(pageNum) {
+            const answerInput = document.getElementById(`answer${pageNum}`);
+            const successDiv = document.getElementById(`success${pageNum}`);
+            
+            if (answerInput.value.toLowerCase() === answers[pageNum]) {
+                successDiv.style.display = "block";
+            } else {
+                alert("Réponse incorrecte. Essayez encore.");
+            }
+        }
+        
+        // Vérifie le mot de passe
+        function checkPassword(pageNum) {
+            const passwordInput = document.getElementById(`password${pageNum}`);
+            const errorDiv = document.getElementById(`error${pageNum}`);
+            
+            if (passwordInput.value === passwords[pageNum]) {
+                // Cache la page actuelle
+                document.getElementById(`page${pageNum}`).classList.add("hidden");
+                
+                // Affiche la page suivante ou la page finale
+                if (pageNum < 3) {
+                    document.getElementById(`page${pageNum + 1}`).classList.remove("hidden");
+                } else {
+                    document.body.classList.add("final-bg");
+                    document.getElementById("finalPage").classList.remove("hidden");
+                }
+            } else {
+                errorDiv.textContent = "Mot de passe incorrect. Essayez encore.";
+            }
+        }
+        
+        // Affiche la page Chaloforest
+        function showChaloforest() {
+            document.body.classList.remove("final-bg");
+            document.getElementById("finalPage").classList.add("hidden");
+            document.getElementById("chaloforestPage").classList.remove("hidden");
+        }
+        
+        // Effectue une recherche
+        function performSearch() {
+            const query = document.getElementById("searchInput").value.toLowerCase();
+            const resultsDiv = document.getElementById("searchResults");
+            
+            if (query.trim() === "") {
+                resultsDiv.innerHTML = "<p>Veuillez entrer un terme de recherche.</p>";
+                return;
+            }
+            
+            // Vérifie si la recherche est "daron souris"
+            if (query === "daron souris") {
+                document.body.classList.remove("final-bg");
+                document.body.classList.add("daron-page");
+                document.getElementById("chaloforestPage").classList.add("hidden");
+                document.getElementById("daronPage").classList.remove("hidden");
+                return;
+            }
+            
+            // Simulation de résultats de recherche pour autres requêtes
+            resultsDiv.innerHTML = `
+                <h3>Résultats pour "${query}"</h3>
+                <div class="result-item">
+                    <h4><a href="#" style="color:#0f0;">${query} - Wikipedia</a></h4>
+                    <p>https://fr.wikipedia.org/wiki/${encodeURIComponent(query)}</p>
+                    <p>Informations générales sur ${query}.</p>
+                </div>
+                <div class="result-item">
+                    <h4><a href="#" style="color:#0f0;">Actualités sur ${query}</a></h4>
+                    <p>https://actualites.chaloforest.com/${encodeURIComponent(query)}</p>
+                    <p>Dernières nouvelles concernant ${query}.</p>
+                </div>
+                <div class="result-item">
+                    <h4><a href="#" style="color:#0f0;">Images de ${query}</a></h4>
+                    <p>https://images.chaloforest.com/search?q=${encodeURIComponent(query)}</p>
+                    <p>Galerie d'images relatives à ${query}.</p>
+                </div>
+            `;
+        }
+        
+        // Permet d'utiliser la touche Entrée pour lancer la recherche
+        document.getElementById("searchInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                performSearch();
+            }
+        });
+    </script>
+</body>
+</html>
